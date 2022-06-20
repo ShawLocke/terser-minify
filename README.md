@@ -1,3 +1,11 @@
+When I use Terser to minify code in code editor, everything works fine, but [the bundle size is not small](https://bundlephobia.com/package/terser@5.14.1).
+
+In code editor, I only need the format feature of Terser (imagine you minify JS code and then you want to beautify it and continue to write more code), I strip out other features (e.g. mangle, compress) from Terser to slim down the bundle size.
+
+---
+
+## Terser README:
+
 <h1><img src="https://terser.org/img/terser-banner-logo.png" alt="Terser" width="400"></h1>
 
   [![NPM Version][npm-image]][npm-url]
