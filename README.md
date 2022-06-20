@@ -1,4 +1,4 @@
-When I use Terser to minify code in code editor, everything works fine, but [the bundle size is not small](https://bundlephobia.com/package/terser@5.14.1).
+When I use Terser to minify code in code editor, everything works fine, but [the bundle size is not small](https://bundlephobia.com/package/terser@5.14.1). *note*: if you do not care about the bundle size, I suggest sticking with Terser.
 
 In code editor, I only need the format feature of Terser (imagine you minify JS code and then you want to beautify it and continue to write more code), I strip out other features (e.g. mangle, compress) from Terser to slim down the bundle size.
 
