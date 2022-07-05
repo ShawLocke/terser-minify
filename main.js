@@ -1,5 +1,5 @@
-import "./lib/transform.js";
-import "./lib/mozilla-ast.js";
+// import "./lib/transform.js";
+// import "./lib/mozilla-ast.js";
 import { minify } from "./lib/minify.js";
 
 export { minify } from "./lib/minify.js";
@@ -10,7 +10,7 @@ export async function _default_options() {
 
     Object.keys(infer_options({ 0: 0 })).forEach((component) => {
         const options = infer_options({
-            [component]: {0: 0}
+            [component]: { 0: 0 },
         });
 
         if (options) defs[component] = options;

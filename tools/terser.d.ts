@@ -1,6 +1,10 @@
 /// <reference lib="es2015" />
 
-import { SectionedSourceMapInput, EncodedSourceMap, DecodedSourceMap } from '@jridgewell/source-map';
+// import {
+//     SectionedSourceMapInput,
+//     EncodedSourceMap,
+//     DecodedSourceMap,
+// } from "@jridgewell/source-map";
 
 export type ECMA = 5 | 2015 | 2016 | 2017 | 2018 | 2019 | 2020;
 
@@ -47,7 +51,7 @@ export interface CompressOptions {
     passes?: number;
     properties?: boolean;
     pure_funcs?: string[];
-    pure_getters?: boolean | 'strict';
+    pure_getters?: boolean | "strict";
     reduce_funcs?: boolean;
     reduce_vars?: boolean;
     sequences?: boolean | number;
@@ -73,7 +77,7 @@ export enum InlineFunctions {
     Disabled = 0,
     SimpleFunctions = 1,
     WithArguments = 2,
-    WithArgumentsAndVariables = 3
+    WithArgumentsAndVariables = 3,
 }
 
 export interface MangleOptions {
@@ -125,7 +129,7 @@ export interface WeightedIdentifierMangler extends SimpleIdentifierMangler {
 export interface ManglePropertiesOptions {
     builtins?: boolean;
     debug?: boolean;
-    keep_quoted?: boolean | 'strict';
+    keep_quoted?: boolean | "strict";
     nth_identifier?: SimpleIdentifierMangler | WeightedIdentifierMangler;
     regex?: RegExp | string;
     reserved?: string[];
@@ -136,13 +140,21 @@ export interface FormatOptions {
     /** @deprecated Not implemented anymore */
     beautify?: boolean;
     braces?: boolean;
-    comments?: boolean | 'all' | 'some' | RegExp | ( (node: any, comment: {
-        value: string,
-        type: 'comment1' | 'comment2' | 'comment3' | 'comment4',
-        pos: number,
-        line: number,
-        col: number,
-    }) => boolean );
+    comments?:
+        | boolean
+        | "all"
+        | "some"
+        | RegExp
+        | ((
+              node: any,
+              comment: {
+                  value: string;
+                  type: "comment1" | "comment2" | "comment3" | "comment4";
+                  pos: number;
+                  line: number;
+                  col: number;
+              }
+          ) => boolean);
     ecma?: ECMA;
     ie8?: boolean;
     keep_numbers?: boolean;
@@ -159,7 +171,7 @@ export interface FormatOptions {
     semicolons?: boolean;
     shebang?: boolean;
     shorthand?: boolean;
-    source_map?: SourceMapOptions;
+    // source_map?: SourceMapOptions;
     webkit?: boolean;
     width?: number;
     wrap_iife?: boolean;
@@ -170,41 +182,52 @@ export enum OutputQuoteStyle {
     PreferDouble = 0,
     AlwaysSingle = 1,
     AlwaysDouble = 2,
-    AlwaysOriginal = 3
+    AlwaysOriginal = 3,
 }
 
 export interface MinifyOptions {
+    /** @deprecated Not effective anymore */
     compress?: boolean | CompressOptions;
     ecma?: ECMA;
+    /** @deprecated Not effective anymore */
     enclose?: boolean | string;
     ie8?: boolean;
     keep_classnames?: boolean | RegExp;
     keep_fnames?: boolean | RegExp;
+    /** @deprecated Not effective anymore */
     mangle?: boolean | MangleOptions;
     module?: boolean;
+    /** @deprecated Not effective anymore */
     nameCache?: object;
     format?: FormatOptions;
     /** @deprecated */
     output?: FormatOptions;
     parse?: ParseOptions;
     safari10?: boolean;
-    sourceMap?: boolean | SourceMapOptions;
+    /** @deprecated Not effective anymore */
+    sourceMap?: boolean;
+    /** @deprecated Not effective anymore */
     toplevel?: boolean;
 }
 
 export interface MinifyOutput {
     code?: string;
-    map?: EncodedSourceMap | string;
-    decoded_map?: DecodedSourceMap | null;
+    /** @deprecated Not effective anymore */
+    map?: string;
+    /** @deprecated Not effective anymore */
+    decoded_map?: null;
 }
 
-export interface SourceMapOptions {
-    /** Source map object, 'inline' or source map file content */
-    content?: SectionedSourceMapInput | string;
-    includeSources?: boolean;
-    filename?: string;
-    root?: string;
-    url?: string | 'inline';
-}
+// export interface SourceMapOptions {
+//     /** Source map object, 'inline' or source map file content */
+//     content?: SectionedSourceMapInput | string;
+//     includeSources?: boolean;
+//     filename?: string;
+//     root?: string;
+//     url?: string | "inline";
+// }
 
-export function minify(files: string | string[] | { [file: string]: string }, options?: MinifyOptions): Promise<MinifyOutput>;
+export function minify(
+    files: string | string[] | { [file: string]: string },
+    options?: MinifyOptions
+): Promise<MinifyOutput>;
