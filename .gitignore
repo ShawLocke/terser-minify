@@ -5,3 +5,5 @@ tmp/
 dist/
 coverage/
 .tmp/
+.DS_Store
+.history/
