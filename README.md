@@ -1,35 +1,34 @@
-When I use Terser to minify code in code editor, everything works fine, but [the bundle size is not small](https://bundlephobia.com/package/terser@5.14.1). *note*: if you do not care about the bundle size, I suggest sticking with Terser.
+When I use Terser to minify code in code editor, everything works fine, but [the bundle size is not small](https://bundlephobia.com/package/terser@5.14.1). _Note_: if you do not care about the bundle size, I suggest sticking with Terser.
 
 In code editor, I only need the format feature of Terser (imagine you minify JS code and then you beautify it and continue to write more code, you may don't want to see a function argument became `s` from `speed`), I strip out other features (e.g. mangle, compress) from Terser to slim down the bundle size.
 
-Note: 
+Note:
 
-- based on Terser 5.14.1.
-- extract `format` from Terser, strip out `mangle` and `compress`, get rid of 2 dependencies. Bundle size is [243kB](@shawlocke/terser-minify@5.14.4) now (Terser bundle size is [557kB](https://bundlephobia.com/package/terser@5.14.1))
-- get rid of 1 dependency. Bundle size is [136kB](@shawlocke/terser-minify@5.14.5) now.
-    
+-   This package is based on Terser 5.14.1. It **only supports `format`** of Terser.
+-   Extract `format` from Terser, strip out `mangle` and `compress`, get rid of 2 dependencies. Bundle size is [243kB](@shawlocke/terser-minify@5.14.4) now (Terser bundle size is [557kB](https://bundlephobia.com/package/terser@5.14.1)). See details in [PR](https://github.com/ShawLocke/terser-minify/pull/1).
+-   Get rid of 1 dependency. Bundle size is [136kB](@shawlocke/terser-minify@5.14.5) now. See details in [PR](https://github.com/ShawLocke/terser-minify/pull/2).
+-   Use [np](https://github.com/sindresorhus/np) to publish package, refer to [publish guide](https://zellwk.com/blog/publish-to-npm/).
+
 ---
 
 ## Terser README:
 
 <h1><img src="https://terser.org/img/terser-banner-logo.png" alt="Terser" width="400"></h1>
 
-  [![NPM Version][npm-image]][npm-url]
-  [![NPM Downloads][downloads-image]][downloads-url]
-  [![Travis Build][travis-image]][travis-url]
-  [![Opencollective financial contributors][opencollective-contributors]][opencollective-url]
+[![NPM Version][npm-image]][npm-url]
+[![NPM Downloads][downloads-image]][downloads-url]
+[![Travis Build][travis-image]][travis-url]
+[![Opencollective financial contributors][opencollective-contributors]][opencollective-url]
 
 A JavaScript mangler/compressor toolkit for ES6+.
 
-*note*: You can support this project on patreon: <a target="_blank" rel="nofollow" href="https://www.patreon.com/fabiosantoscode"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="patron" width="100px" height="auto"></a>. Check out [PATRONS.md](https://github.com/terser/terser/blob/master/PATRONS.md) for our first-tier patrons.
+_note_: You can support this project on patreon: <a target="_blank" rel="nofollow" href="https://www.patreon.com/fabiosantoscode"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="patron" width="100px" height="auto"></a>. Check out [PATRONS.md](https://github.com/terser/terser/blob/master/PATRONS.md) for our first-tier patrons.
 
 Terser recommends you use RollupJS to bundle your modules, as that produces smaller code overall.
 
-*Beautification* has been undocumented and is *being removed* from terser, we recommend you use [prettier](https://npmjs.com/package/prettier).
+_Beautification_ has been undocumented and is _being removed_ from terser, we recommend you use [prettier](https://npmjs.com/package/prettier).
 
 Find the changelog in [CHANGELOG.md](https://github.com/terser/terser/blob/master/CHANGELOG.md)
-
-
 
 [npm-image]: https://img.shields.io/npm/v/terser.svg
 [npm-url]: https://npmjs.org/package/terser
@@ -40,16 +39,14 @@ Find the changelog in [CHANGELOG.md](https://github.com/terser/terser/blob/maste
 [opencollective-contributors]: https://opencollective.com/terser/tiers/badge.svg
 [opencollective-url]: https://opencollective.com/terser
 
-Why choose terser?
-------------------
+## Why choose terser?
 
 `uglify-es` is [no longer maintained](https://github.com/mishoo/UglifyJS2/issues/3156#issuecomment-392943058) and `uglify-js` does not support ES6+.
 
 **`terser`** is a fork of `uglify-es` that mostly retains API and CLI compatibility
 with `uglify-es` and `uglify-js@3`.
 
-Install
--------
+## Install
 
 First make sure you have installed the latest version of [node.js](http://nodejs.org/)
 (You may need to restart your computer after this step).
@@ -68,9 +65,9 @@ From NPM for programmatic use:
 
     terser [input files] [options]
 
-Terser can take multiple input files.  It's recommended that you pass the
-input files first, then pass the options.  Terser will parse input files
-in sequence and apply any compression options.  The files are parsed in the
+Terser can take multiple input files. It's recommended that you pass the
+input files first, then pass the options. Terser will parse input files
+in sequence and apply any compression options. The files are parsed in the
 same global scope, that is, a reference from a file to some
 variable/function declared in another file will be matched properly.
 
@@ -195,25 +192,25 @@ a double dash to prevent input files being used as option arguments:
                                 when included in, say, a browser.
 ```
 
-Specify `--output` (`-o`) to declare the output file.  Otherwise the output
+Specify `--output` (`-o`) to declare the output file. Otherwise the output
 goes to STDOUT.
 
 ## CLI source map options
 
 Terser can generate a source map file, which is highly useful for
-debugging your compressed JavaScript.  To get a source map, pass
+debugging your compressed JavaScript. To get a source map, pass
 `--source-map --output output.js` (source map will be written out to
 `output.js.map`).
 
 Additional options:
 
-- `--source-map "filename='<NAME>'"` to specify the name of the source map.
+-   `--source-map "filename='<NAME>'"` to specify the name of the source map.
 
-- `--source-map "root='<URL>'"` to pass the URL where the original files can be found.
+-   `--source-map "root='<URL>'"` to pass the URL where the original files can be found.
 
-- `--source-map "url='<URL>'"` to specify the URL where the source map can be found.
-  Otherwise Terser assumes HTTP `X-SourceMap` is being used and will omit the
-  `//# sourceMappingURL=` directive.
+-   `--source-map "url='<URL>'"` to specify the URL where the source map can be found.
+    Otherwise Terser assumes HTTP `X-SourceMap` is being used and will omit the
+    `//# sourceMappingURL=` directive.
 
 For example:
 
@@ -222,7 +219,7 @@ For example:
              --source-map "root='http://foo.com/src',url='foo.min.js.map'"
 
 The above will compress and mangle `file1.js` and `file2.js`, will drop the
-output in `foo.min.js` and the source map in `foo.min.js.map`.  The source
+output in `foo.min.js` and the source map in `foo.min.js.map`. The source
 mapping will refer to `http://foo.com/src/js/file1.js` and
 `http://foo.com/src/js/file2.js` (in fact it will list `http://foo.com/src`
 as the source map root, and the original files as `js/file1.js` and
@@ -231,9 +228,9 @@ as the source map root, and the original files as `js/file1.js` and
 ### Composed source map
 
 When you're compressing JS code that was output by a compiler such as
-CoffeeScript, mapping to the JS code won't be too helpful.  Instead, you'd
-like to map back to the original code (i.e. CoffeeScript).  Terser has an
-option to take an input source map.  Assuming you have a mapping from
+CoffeeScript, mapping to the JS code won't be too helpful. Instead, you'd
+like to map back to the original code (i.e. CoffeeScript). Terser has an
+option to take an input source map. Assuming you have a mapping from
 CoffeeScript → compiled JS, Terser can generate a map from CoffeeScript →
 compressed JS by mapping every token in the compiled JS to its original
 location.
@@ -244,7 +241,7 @@ the sources.
 
 ## CLI compress options
 
-You need to pass `--compress` (`-c`) to enable the compressor.  Optionally
+You need to pass `--compress` (`-c`) to enable the compressor. Optionally
 you can pass a comma-separated list of [compress options](#compress-options).
 
 Options are in the form `foo=bar`, or just `foo` (the latter implies
@@ -257,16 +254,16 @@ Example:
 
 ## CLI mangle options
 
-To enable the mangler you need to pass `--mangle` (`-m`).  The following
+To enable the mangler you need to pass `--mangle` (`-m`). The following
 (comma-separated) options are supported:
 
-- `toplevel` (default `false`) -- mangle names declared in the top level scope.
+-   `toplevel` (default `false`) -- mangle names declared in the top level scope.
 
-- `eval` (default `false`) -- mangle names visible in scopes where `eval` or `with` are used.
+-   `eval` (default `false`) -- mangle names visible in scopes where `eval` or `with` are used.
 
 When mangling is enabled but you want to prevent certain names from being
 mangled, you can declare those names with `--mangle reserved` — pass a
-comma-separated list of names.  For example:
+comma-separated list of names. For example:
 
     terser ... -m reserved=['$','require','exports']
 
@@ -276,7 +273,7 @@ to prevent the `require`, `exports` and `$` names from being changed.
 
 **Note:** THIS **WILL** BREAK YOUR CODE. A good rule of thumb is not to use this unless you know exactly what you're doing and how this works and read this section until the end.
 
-Mangling property names is a separate step, different from variable name mangling.  Pass
+Mangling property names is a separate step, different from variable name mangling. Pass
 `--mangle-props` to enable it. The least dangerous
 way to use this is to use the `regex` option like so:
 
@@ -302,56 +299,99 @@ An example:
 var x = {
     baz_: 0,
     foo_: 1,
-    calc: function() {
+    calc: function () {
         return this.foo_ + this.baz_;
-    }
+    },
 };
 x.bar_ = 2;
 x["baz_"] = 3;
 console.log(x.calc());
 ```
+
 Mangle all properties (except for JavaScript `builtins`) (**very** unsafe):
+
 ```bash
 $ terser example.js -c passes=2 -m --mangle-props
 ```
+
 ```javascript
-var x={o:3,t:1,i:function(){return this.t+this.o},s:2};console.log(x.i());
+var x = {
+    o: 3,
+    t: 1,
+    i: function () {
+        return this.t + this.o;
+    },
+    s: 2,
+};
+console.log(x.i());
 ```
+
 Mangle all properties except for `reserved` properties (still very unsafe):
+
 ```bash
 $ terser example.js -c passes=2 -m --mangle-props reserved=[foo_,bar_]
 ```
+
 ```javascript
-var x={o:3,foo_:1,t:function(){return this.foo_+this.o},bar_:2};console.log(x.t());
+var x = {
+    o: 3,
+    foo_: 1,
+    t: function () {
+        return this.foo_ + this.o;
+    },
+    bar_: 2,
+};
+console.log(x.t());
 ```
+
 Mangle all properties matching a `regex` (not as unsafe but still unsafe):
+
 ```bash
 $ terser example.js -c passes=2 -m --mangle-props regex=/_$/
 ```
+
 ```javascript
-var x={o:3,t:1,calc:function(){return this.t+this.o},i:2};console.log(x.calc());
+var x = {
+    o: 3,
+    t: 1,
+    calc: function () {
+        return this.t + this.o;
+    },
+    i: 2,
+};
+console.log(x.calc());
 ```
 
 Combining mangle properties options:
+
 ```bash
 $ terser example.js -c passes=2 -m --mangle-props regex=/_$/,reserved=[bar_]
 ```
+
 ```javascript
-var x={o:3,t:1,calc:function(){return this.t+this.o},bar_:2};console.log(x.calc());
+var x = {
+    o: 3,
+    t: 1,
+    calc: function () {
+        return this.t + this.o;
+    },
+    bar_: 2,
+};
+console.log(x.calc());
 ```
 
 In order for this to be of any use, we avoid mangling standard JS names and DOM
 API properties by default (`--mangle-props builtins` to override).
 
 A regular expression can be used to define which property names should be
-mangled.  For example, `--mangle-props regex=/^_/` will only mangle property
+mangled. For example, `--mangle-props regex=/^_/` will only mangle property
 names that start with an underscore.
 
 When you compress multiple files using this option, in order for them to
 work together in the end we need to ensure somehow that one property gets
-mangled to the same name in all of them.  For this, pass `--name-cache filename.json`
+mangled to the same name in all of them. For this, pass `--name-cache filename.json`
 and Terser will maintain these mappings in a file which can then be reused.
-It should be initially empty.  Example:
+It should be initially empty. Example:
 
 ```bash
 $ rm -f /tmp/cache.json  # start fresh
@@ -374,17 +414,20 @@ unquoted style (`o.foo`). Example:
 ```javascript
 // stuff.js
 var o = {
-    "foo": 1,
-    bar: 3
+    foo: 1,
+    bar: 3,
 };
 o.foo += o.bar;
 console.log(o.foo);
 ```
+
 ```bash
 $ terser stuff.js --mangle-props keep_quoted -c -m
 ```
+
 ```javascript
-var o={foo:1,o:3};o.foo+=o.o,console.log(o.foo);
+var o = { foo: 1, o: 3 };
+(o.foo += o.o), console.log(o.foo);
 ```
 
 ### Debugging property name mangling
@@ -398,8 +441,10 @@ where mangling is breaking things.
 ```bash
 $ terser stuff.js --mangle-props debug -c -m
 ```
+
 ```javascript
-var o={_$foo$_:1,_$bar$_:3};o._$foo$_+=o._$bar$_,console.log(o._$foo$_);
+var o = { _$foo$_: 1, _$bar$_: 3 };
+(o._$foo$_ += o._$bar$_), console.log(o._$foo$_);
 ```
 
 You can also pass a custom suffix using `--mangle-props debug=XYZ`. This would then
@@ -429,6 +474,7 @@ import { minify } from "terser";
 ```
 
 Browser loading is also supported:
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/source-map@0.7.3/dist/source-map.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/terser/dist/bundle.min.js"></script>
@@ -438,20 +484,22 @@ There is a single async high level function, **`async minify(code, options)`**,
 which will perform all minification [phases](#minify-options) in a configurable
 manner. By default `minify()` will enable [`compress`](#compress-options)
 and [`mangle`](#mangle-options). Example:
+
 ```javascript
 var code = "function add(first, second) { return first + second; }";
 var result = await minify(code, { sourceMap: true });
-console.log(result.code);  // minified output: function add(n,d){return n+d}
-console.log(result.map);  // source map
+console.log(result.code); // minified output: function add(n,d){return n+d}
+console.log(result.map); // source map
 ```
 
 You can `minify` more than one JavaScript file at a time by using an object
 for the first argument where the keys are file names and the values are source
 code:
+
 ```javascript
 var code = {
     "file1.js": "function add(first, second) { return first + second; }",
-    "file2.js": "console.log(add(1 + 2, 3 + 4));"
+    "file2.js": "console.log(add(1 + 2, 3 + 4));",
 };
 var result = await minify(code);
 console.log(result.code);
@@ -459,10 +507,11 @@ console.log(result.code);
 ```
 
 The `toplevel` option:
+
 ```javascript
 var code = {
     "file1.js": "function add(first, second) { return first + second; }",
-    "file2.js": "console.log(add(1 + 2, 3 + 4));"
+    "file2.js": "console.log(add(1 + 2, 3 + 4));",
 };
 var options = { toplevel: true };
 var result = await minify(code, options);
@@ -471,19 +520,26 @@ console.log(result.code);
 ```
 
 The `nameCache` option:
+
 ```javascript
 var options = {
     mangle: {
         toplevel: true,
     },
-    nameCache: {}
+    nameCache: {},
 };
-var result1 = await minify({
-    "file1.js": "function add(first, second) { return first + second; }"
-}, options);
-var result2 = await minify({
-    "file2.js": "console.log(add(1 + 2, 3 + 4));"
-}, options);
+var result1 = await minify(
+    {
+        "file1.js": "function add(first, second) { return first + second; }",
+    },
+    options
+);
+var result2 = await minify(
+    {
+        "file2.js": "console.log(add(1 + 2, 3 + 4));",
+    },
+    options
+);
 console.log(result1.code);
 // function n(n,r){return n+r}
 console.log(result2.code);
@@ -491,42 +547,58 @@ console.log(result2.code);
 ```
 
 You may persist the name cache to the file system in the following way:
+
 ```javascript
 var cacheFileName = "/tmp/cache.json";
 var options = {
     mangle: {
         properties: true,
     },
-    nameCache: JSON.parse(fs.readFileSync(cacheFileName, "utf8"))
+    nameCache: JSON.parse(fs.readFileSync(cacheFileName, "utf8")),
 };
-fs.writeFileSync("part1.js", await minify({
-    "file1.js": fs.readFileSync("file1.js", "utf8"),
-    "file2.js": fs.readFileSync("file2.js", "utf8")
-}, options).code, "utf8");
-fs.writeFileSync("part2.js", await minify({
-    "file3.js": fs.readFileSync("file3.js", "utf8"),
-    "file4.js": fs.readFileSync("file4.js", "utf8")
-}, options).code, "utf8");
+fs.writeFileSync(
+    "part1.js",
+    await minify(
+        {
+            "file1.js": fs.readFileSync("file1.js", "utf8"),
+            "file2.js": fs.readFileSync("file2.js", "utf8"),
+        },
+        options
+    ).code,
+    "utf8"
+);
+fs.writeFileSync(
+    "part2.js",
+    await minify(
+        {
+            "file3.js": fs.readFileSync("file3.js", "utf8"),
+            "file4.js": fs.readFileSync("file4.js", "utf8"),
+        },
+        options
+    ).code,
+    "utf8"
+);
 fs.writeFileSync(cacheFileName, JSON.stringify(options.nameCache), "utf8");
 ```
 
 An example of a combination of `minify()` options:
+
 ```javascript
 var code = {
     "file1.js": "function add(first, second) { return first + second; }",
-    "file2.js": "console.log(add(1 + 2, 3 + 4));"
+    "file2.js": "console.log(add(1 + 2, 3 + 4));",
 };
 var options = {
     toplevel: true,
     compress: {
         global_defs: {
-            "@console.log": "alert"
+            "@console.log": "alert",
         },
-        passes: 2
+        passes: 2,
     },
     format: {
-        preamble: "/* minified */"
-    }
+        preamble: "/* minified */",
+    },
 };
 var result = await minify(code, options);
 console.log(result.code);
@@ -535,9 +607,10 @@ console.log(result.code);
 ```
 
 An error example:
+
 ```javascript
 try {
-    const result = await minify({"foo.js" : "if (0) else console.log(1);"});
+    const result = await minify({ "foo.js": "if (0) else console.log(1);" });
     // Do something with result
 } catch (error) {
     const { message, filename, line, col, pos } = error;
@@ -547,61 +620,61 @@ try {
 
 ## Minify options
 
-- `ecma` (default `undefined`) - pass `5`, `2015`, `2016`, etc to override
-  `compress` and `format`'s `ecma` options.
+-   `ecma` (default `undefined`) - pass `5`, `2015`, `2016`, etc to override
+    `compress` and `format`'s `ecma` options.
 
-- `enclose` (default `false`) - pass `true`, or a string in the format
-  of `"args[:values]"`, where `args` and `values` are comma-separated
-  argument names and values, respectively, to embed the output in a big
-  function with the configurable arguments and values.
+-   `enclose` (default `false`) - pass `true`, or a string in the format
+    of `"args[:values]"`, where `args` and `values` are comma-separated
+    argument names and values, respectively, to embed the output in a big
+    function with the configurable arguments and values.
 
-- `parse` (default `{}`) — pass an object if you wish to specify some
-  additional [parse options](#parse-options).
+-   `parse` (default `{}`) — pass an object if you wish to specify some
+    additional [parse options](#parse-options).
 
-- `compress` (default `{}`) — pass `false` to skip compressing entirely.
-  Pass an object to specify custom [compress options](#compress-options).
+-   `compress` (default `{}`) — pass `false` to skip compressing entirely.
+    Pass an object to specify custom [compress options](#compress-options).
 
-- `mangle` (default `true`) — pass `false` to skip mangling names, or pass
-  an object to specify [mangle options](#mangle-options) (see below).
+-   `mangle` (default `true`) — pass `false` to skip mangling names, or pass
+    an object to specify [mangle options](#mangle-options) (see below).
 
-  - `mangle.properties` (default `false`) — a subcategory of the mangle option.
-    Pass an object to specify custom [mangle property options](#mangle-properties-options).
+    -   `mangle.properties` (default `false`) — a subcategory of the mangle option.
+        Pass an object to specify custom [mangle property options](#mangle-properties-options).
 
-- `module` (default `false`) — Use when minifying an ES6 module. "use strict"
-  is implied and names can be mangled on the top scope. If `compress` or
-  `mangle` is enabled then the `toplevel` option will be enabled.
+-   `module` (default `false`) — Use when minifying an ES6 module. "use strict"
+    is implied and names can be mangled on the top scope. If `compress` or
+    `mangle` is enabled then the `toplevel` option will be enabled.
 
-- `format` or `output` (default `null`) — pass an object if you wish to specify
-  additional [format options](#format-options).  The defaults are optimized
-  for best compression.
+-   `format` or `output` (default `null`) — pass an object if you wish to specify
+    additional [format options](#format-options). The defaults are optimized
+    for best compression.
 
-- `sourceMap` (default `false`) - pass an object if you wish to specify
-  [source map options](#source-map-options).
+-   `sourceMap` (default `false`) - pass an object if you wish to specify
+    [source map options](#source-map-options).
 
-- `toplevel` (default `false`) - set to `true` if you wish to enable top level
-  variable and function name mangling and to drop unused variables and functions.
+-   `toplevel` (default `false`) - set to `true` if you wish to enable top level
+    variable and function name mangling and to drop unused variables and functions.
 
-- `nameCache` (default `null`) - pass an empty object `{}` or a previously
-  used `nameCache` object if you wish to cache mangled variable and
-  property names across multiple invocations of `minify()`. Note: this is
-  a read/write property. `minify()` will read the name cache state of this
-  object and update it during minification so that it may be
-  reused or externally persisted by the user.
+-   `nameCache` (default `null`) - pass an empty object `{}` or a previously
+    used `nameCache` object if you wish to cache mangled variable and
+    property names across multiple invocations of `minify()`. Note: this is
+    a read/write property. `minify()` will read the name cache state of this
+    object and update it during minification so that it may be
+    reused or externally persisted by the user.
 
-- `ie8` (default `false`) - set to `true` to support IE8.
+-   `ie8` (default `false`) - set to `true` to support IE8.
 
-- `keep_classnames` (default: `undefined`) - pass `true` to prevent discarding or mangling
-  of class names. Pass a regular expression to only keep class names matching that regex.
+-   `keep_classnames` (default: `undefined`) - pass `true` to prevent discarding or mangling
+    of class names. Pass a regular expression to only keep class names matching that regex.
 
-- `keep_fnames` (default: `false`) - pass `true` to prevent discarding or mangling
-  of function names. Pass a regular expression to only keep function names matching that regex.
-  Useful for code relying on `Function.prototype.name`. If the top level minify option
-  `keep_classnames` is `undefined` it will be overridden with the value of the top level
-  minify option `keep_fnames`.
+-   `keep_fnames` (default: `false`) - pass `true` to prevent discarding or mangling
+    of function names. Pass a regular expression to only keep function names matching that regex.
+    Useful for code relying on `Function.prototype.name`. If the top level minify option
+    `keep_classnames` is `undefined` it will be overridden with the value of the top level
+    minify option `keep_fnames`.
 
-- `safari10` (default: `false`) - pass `true` to work around Safari 10/11 bugs in
-  loop scoping and `await`. See `safari10` options in [`mangle`](#mangle-options)
-  and [`format`](#format-options) for details.
+-   `safari10` (default: `false`) - pass `true` to work around Safari 10/11 bugs in
+    loop scoping and `await`. See `safari10` options in [`mangle`](#mangle-options)
+    and [`format`](#format-options) for details.
 
 ## Minify options structure
 
@@ -641,19 +714,23 @@ try {
 ### Source map options
 
 To generate a source map:
+
 ```javascript
-var result = await minify({"file1.js": "var a = function() {};"}, {
-    sourceMap: {
-        filename: "out.js",
-        url: "out.js.map"
+var result = await minify(
+    { "file1.js": "var a = function() {};" },
+    {
+        sourceMap: {
+            filename: "out.js",
+            url: "out.js.map",
+        },
     }
-});
+);
 console.log(result.code); // minified output
-console.log(result.map);  // source map
+console.log(result.map); // source map
 ```
 
 Note that the source map is not saved in a file, it's just returned in
-`result.map`.  The value passed for `sourceMap.url` is only used to set
+`result.map`. The value passed for `sourceMap.url` is only used to set
 `//# sourceMappingURL=out.js.map` in `result.code`. The value of
 `filename` is only used to set `file` attribute (see [the spec][sm-spec])
 in source map file.
@@ -662,24 +739,32 @@ You can set option `sourceMap.url` to be `"inline"` and source map will
 be appended to code.
 
 You can also specify sourceRoot property to be included in source map:
+
 ```javascript
-var result = await minify({"file1.js": "var a = function() {};"}, {
-    sourceMap: {
-        root: "http://example.com/src",
-        url: "out.js.map"
+var result = await minify(
+    { "file1.js": "var a = function() {};" },
+    {
+        sourceMap: {
+            root: "http://example.com/src",
+            url: "out.js.map",
+        },
     }
-});
+);
 ```
 
 If you're compressing compiled JavaScript and have a source map for it, you
 can use `sourceMap.content`:
+
 ```javascript
-var result = await minify({"compiled.js": "compiled code"}, {
-    sourceMap: {
-        content: "content from compiled.js.map",
-        url: "minified.js.map"
+var result = await minify(
+    { "compiled.js": "compiled code" },
+    {
+        sourceMap: {
+            content: "content from compiled.js.map",
+            url: "minified.js.map",
+        },
     }
-});
+);
 // same as before, it returns `code` and `map`
 ```
 
@@ -689,251 +774,252 @@ If you happen to need the source map as a raw object, set `sourceMap.asObject` t
 
 ## Parse options
 
-- `bare_returns` (default `false`) -- support top level `return` statements
+-   `bare_returns` (default `false`) -- support top level `return` statements
 
-- `html5_comments` (default `true`)
+-   `html5_comments` (default `true`)
 
-- `shebang` (default `true`) -- support `#!command` as the first line
+-   `shebang` (default `true`) -- support `#!command` as the first line
 
-- `spidermonkey` (default `false`) -- accept a Spidermonkey (Mozilla) AST
+-   `spidermonkey` (default `false`) -- accept a Spidermonkey (Mozilla) AST
 
 ## Compress options
 
-- `defaults` (default: `true`) -- Pass `false` to disable most default
-  enabled `compress` transforms. Useful when you only want to enable a few
-  `compress` options while disabling the rest.
+-   `defaults` (default: `true`) -- Pass `false` to disable most default
+    enabled `compress` transforms. Useful when you only want to enable a few
+    `compress` options while disabling the rest.
 
-- `arrows` (default: `true`) -- Class and object literal methods are converted
-  will also be converted to arrow expressions if the resultant code is shorter:
-  `m(){return x}` becomes `m:()=>x`. To do this to regular ES5 functions which
-  don't use `this` or `arguments`, see `unsafe_arrows`.
+-   `arrows` (default: `true`) -- Class and object literal methods are converted
+    will also be converted to arrow expressions if the resultant code is shorter:
+    `m(){return x}` becomes `m:()=>x`. To do this to regular ES5 functions which
+    don't use `this` or `arguments`, see `unsafe_arrows`.
 
-- `arguments` (default: `false`) -- replace `arguments[index]` with function
-  parameter name whenever possible.
+-   `arguments` (default: `false`) -- replace `arguments[index]` with function
+    parameter name whenever possible.
 
-- `booleans` (default: `true`) -- various optimizations for boolean context,
-  for example `!!a ? b : c → a ? b : c`
+-   `booleans` (default: `true`) -- various optimizations for boolean context,
+    for example `!!a ? b : c → a ? b : c`
 
-- `booleans_as_integers` (default: `false`) -- Turn booleans into 0 and 1, also
-  makes comparisons with booleans use `==` and `!=` instead of `===` and `!==`.
+-   `booleans_as_integers` (default: `false`) -- Turn booleans into 0 and 1, also
+    makes comparisons with booleans use `==` and `!=` instead of `===` and `!==`.
 
-- `collapse_vars` (default: `true`) -- Collapse single-use non-constant variables,
-  side effects permitting.
+-   `collapse_vars` (default: `true`) -- Collapse single-use non-constant variables,
+    side effects permitting.
 
-- `comparisons` (default: `true`) -- apply certain optimizations to binary nodes,
-  e.g. `!(a <= b) → a > b` (only when `unsafe_comps`), attempts to negate binary
-  nodes, e.g. `a = !b && !c && !d && !e → a=!(b||c||d||e)` etc.
+-   `comparisons` (default: `true`) -- apply certain optimizations to binary nodes,
+    e.g. `!(a <= b) → a > b` (only when `unsafe_comps`), attempts to negate binary
+    nodes, e.g. `a = !b && !c && !d && !e → a=!(b||c||d||e)` etc.
 
-- `computed_props` (default: `true`) -- Transforms constant computed properties
-  into regular ones: `{["computed"]: 1}` is converted to `{computed: 1}`.
+-   `computed_props` (default: `true`) -- Transforms constant computed properties
+    into regular ones: `{["computed"]: 1}` is converted to `{computed: 1}`.
 
-- `conditionals` (default: `true`) -- apply optimizations for `if`-s and conditional
-  expressions
+-   `conditionals` (default: `true`) -- apply optimizations for `if`-s and conditional
+    expressions
 
-- `dead_code` (default: `true`) -- remove unreachable code
+-   `dead_code` (default: `true`) -- remove unreachable code
 
-- `directives` (default: `true`) -- remove redundant or non-standard directives
+-   `directives` (default: `true`) -- remove redundant or non-standard directives
 
-- `drop_console` (default: `false`) -- Pass `true` to discard calls to
-  `console.*` functions. If you wish to drop a specific function call
-  such as `console.info` and/or retain side effects from function arguments
-  after dropping the function call then use `pure_funcs` instead.
+-   `drop_console` (default: `false`) -- Pass `true` to discard calls to
+    `console.*` functions. If you wish to drop a specific function call
+    such as `console.info` and/or retain side effects from function arguments
+    after dropping the function call then use `pure_funcs` instead.
 
-- `drop_debugger` (default: `true`) -- remove `debugger;` statements
+-   `drop_debugger` (default: `true`) -- remove `debugger;` statements
 
-- `ecma` (default: `5`) -- Pass `2015` or greater to enable `compress` options that
-  will transform ES5 code into smaller ES6+ equivalent forms.
+-   `ecma` (default: `5`) -- Pass `2015` or greater to enable `compress` options that
+    will transform ES5 code into smaller ES6+ equivalent forms.
 
-- `evaluate` (default: `true`) -- attempt to evaluate constant expressions
+-   `evaluate` (default: `true`) -- attempt to evaluate constant expressions
 
-- `expression` (default: `false`) -- Pass `true` to preserve completion values
-  from terminal statements without `return`, e.g. in bookmarklets.
+-   `expression` (default: `false`) -- Pass `true` to preserve completion values
+    from terminal statements without `return`, e.g. in bookmarklets.
 
-- `global_defs` (default: `{}`) -- see [conditional compilation](#conditional-compilation)
+-   `global_defs` (default: `{}`) -- see [conditional compilation](#conditional-compilation)
 
-- `hoist_funs` (default: `false`) -- hoist function declarations
+-   `hoist_funs` (default: `false`) -- hoist function declarations
 
-- `hoist_props` (default: `true`) -- hoist properties from constant object and
-  array literals into regular variables subject to a set of constraints. For example:
-  `var o={p:1, q:2}; f(o.p, o.q);` is converted to `f(1, 2);`. Note: `hoist_props`
-  works best with `mangle` enabled, the `compress` option `passes` set to `2` or higher,
-  and the `compress` option `toplevel` enabled.
+-   `hoist_props` (default: `true`) -- hoist properties from constant object and
+    array literals into regular variables subject to a set of constraints. For example:
+    `var o={p:1, q:2}; f(o.p, o.q);` is converted to `f(1, 2);`. Note: `hoist_props`
+    works best with `mangle` enabled, the `compress` option `passes` set to `2` or higher,
+    and the `compress` option `toplevel` enabled.
 
-- `hoist_vars` (default: `false`) -- hoist `var` declarations (this is `false`
-  by default because it seems to increase the size of the output in general)
+-   `hoist_vars` (default: `false`) -- hoist `var` declarations (this is `false`
+    by default because it seems to increase the size of the output in general)
 
-- `if_return` (default: `true`) -- optimizations for if/return and if/continue
+-   `if_return` (default: `true`) -- optimizations for if/return and if/continue
 
-- `inline` (default: `true`) -- inline calls to function with simple/`return` statement:
-  - `false` -- same as `0`
-  - `0` -- disabled inlining
-  - `1` -- inline simple functions
-  - `2` -- inline functions with arguments
-  - `3` -- inline functions with arguments and variables
-  - `true` -- same as `3`
+-   `inline` (default: `true`) -- inline calls to function with simple/`return` statement:
 
-- `join_vars` (default: `true`) -- join consecutive `var` statements
+    -   `false` -- same as `0`
+    -   `0` -- disabled inlining
+    -   `1` -- inline simple functions
+    -   `2` -- inline functions with arguments
+    -   `3` -- inline functions with arguments and variables
+    -   `true` -- same as `3`
 
-- `keep_classnames` (default: `false`) -- Pass `true` to prevent the compressor from
-  discarding class names. Pass a regular expression to only keep class names matching
-  that regex. See also: the `keep_classnames` [mangle option](#mangle-options).
+-   `join_vars` (default: `true`) -- join consecutive `var` statements
 
-- `keep_fargs` (default: `true`) -- Prevents the compressor from discarding unused
-  function arguments.  You need this for code which relies on `Function.length`.
+-   `keep_classnames` (default: `false`) -- Pass `true` to prevent the compressor from
+    discarding class names. Pass a regular expression to only keep class names matching
+    that regex. See also: the `keep_classnames` [mangle option](#mangle-options).
 
-- `keep_fnames` (default: `false`) -- Pass `true` to prevent the
-  compressor from discarding function names. Pass a regular expression to only keep
-  function names matching that regex. Useful for code relying on `Function.prototype.name`.
-  See also: the `keep_fnames` [mangle option](#mangle-options).
+-   `keep_fargs` (default: `true`) -- Prevents the compressor from discarding unused
+    function arguments. You need this for code which relies on `Function.length`.
 
-- `keep_infinity` (default: `false`) -- Pass `true` to prevent `Infinity` from
-  being compressed into `1/0`, which may cause performance issues on Chrome.
+-   `keep_fnames` (default: `false`) -- Pass `true` to prevent the
+    compressor from discarding function names. Pass a regular expression to only keep
+    function names matching that regex. Useful for code relying on `Function.prototype.name`.
+    See also: the `keep_fnames` [mangle option](#mangle-options).
 
-- `loops` (default: `true`) -- optimizations for `do`, `while` and `for` loops
-  when we can statically determine the condition.
+-   `keep_infinity` (default: `false`) -- Pass `true` to prevent `Infinity` from
+    being compressed into `1/0`, which may cause performance issues on Chrome.
 
-- `module` (default `false`) -- Pass `true` when compressing an ES6 module. Strict
-  mode is implied and the `toplevel` option as well.
+-   `loops` (default: `true`) -- optimizations for `do`, `while` and `for` loops
+    when we can statically determine the condition.
 
-- `negate_iife` (default: `true`) -- negate "Immediately-Called Function Expressions"
-  where the return value is discarded, to avoid the parens that the
-  code generator would insert.
+-   `module` (default `false`) -- Pass `true` when compressing an ES6 module. Strict
+    mode is implied and the `toplevel` option as well.
 
-- `passes` (default: `1`) -- The maximum number of times to run compress.
-  In some cases more than one pass leads to further compressed code.  Keep in
-  mind more passes will take more time.
+-   `negate_iife` (default: `true`) -- negate "Immediately-Called Function Expressions"
+    where the return value is discarded, to avoid the parens that the
+    code generator would insert.
 
-- `properties` (default: `true`) -- rewrite property access using the dot notation, for
-  example `foo["bar"] → foo.bar`
+-   `passes` (default: `1`) -- The maximum number of times to run compress.
+    In some cases more than one pass leads to further compressed code. Keep in
+    mind more passes will take more time.
 
-- `pure_funcs` (default: `null`) -- You can pass an array of names and
-  Terser will assume that those functions do not produce side
-  effects.  DANGER: will not check if the name is redefined in scope.
-  An example case here, for instance `var q = Math.floor(a/b)`.  If
-  variable `q` is not used elsewhere, Terser will drop it, but will
-  still keep the `Math.floor(a/b)`, not knowing what it does.  You can
-  pass `pure_funcs: [ 'Math.floor' ]` to let it know that this
-  function won't produce any side effect, in which case the whole
-  statement would get discarded.  The current implementation adds some
-  overhead (compression will be slower).
+-   `properties` (default: `true`) -- rewrite property access using the dot notation, for
+    example `foo["bar"] → foo.bar`
 
-- `pure_getters` (default: `"strict"`) -- If you pass `true` for
-  this, Terser will assume that object property access
-  (e.g. `foo.bar` or `foo["bar"]`) doesn't have any side effects.
-  Specify `"strict"` to treat `foo.bar` as side-effect-free only when
-  `foo` is certain to not throw, i.e. not `null` or `undefined`.
+-   `pure_funcs` (default: `null`) -- You can pass an array of names and
+    Terser will assume that those functions do not produce side
+    effects. DANGER: will not check if the name is redefined in scope.
+    An example case here, for instance `var q = Math.floor(a/b)`. If
+    variable `q` is not used elsewhere, Terser will drop it, but will
+    still keep the `Math.floor(a/b)`, not knowing what it does. You can
+    pass `pure_funcs: [ 'Math.floor' ]` to let it know that this
+    function won't produce any side effect, in which case the whole
+    statement would get discarded. The current implementation adds some
+    overhead (compression will be slower).
 
-- `reduce_vars` (default: `true`) -- Improve optimization on variables assigned with and
-  used as constant values.
+-   `pure_getters` (default: `"strict"`) -- If you pass `true` for
+    this, Terser will assume that object property access
+    (e.g. `foo.bar` or `foo["bar"]`) doesn't have any side effects.
+    Specify `"strict"` to treat `foo.bar` as side-effect-free only when
+    `foo` is certain to not throw, i.e. not `null` or `undefined`.
 
-- `reduce_funcs` (default: `true`) -- Inline single-use functions when
-  possible. Depends on `reduce_vars` being enabled.  Disabling this option
-  sometimes improves performance of the output code.
+-   `reduce_vars` (default: `true`) -- Improve optimization on variables assigned with and
+    used as constant values.
 
-- `sequences` (default: `true`) -- join consecutive simple statements using the
-  comma operator.  May be set to a positive integer to specify the maximum number
-  of consecutive comma sequences that will be generated. If this option is set to
-  `true` then the default `sequences` limit is `200`. Set option to `false` or `0`
-  to disable. The smallest `sequences` length is `2`. A `sequences` value of `1`
-  is grandfathered to be equivalent to `true` and as such means `200`. On rare
-  occasions the default sequences limit leads to very slow compress times in which
-  case a value of `20` or less is recommended.
+-   `reduce_funcs` (default: `true`) -- Inline single-use functions when
+    possible. Depends on `reduce_vars` being enabled. Disabling this option
+    sometimes improves performance of the output code.
 
-- `side_effects` (default: `true`) -- Remove expressions which have no side effects
-  and whose results aren't used.
+-   `sequences` (default: `true`) -- join consecutive simple statements using the
+    comma operator. May be set to a positive integer to specify the maximum number
+    of consecutive comma sequences that will be generated. If this option is set to
+    `true` then the default `sequences` limit is `200`. Set option to `false` or `0`
+    to disable. The smallest `sequences` length is `2`. A `sequences` value of `1`
+    is grandfathered to be equivalent to `true` and as such means `200`. On rare
+    occasions the default sequences limit leads to very slow compress times in which
+    case a value of `20` or less is recommended.
 
-- `switches` (default: `true`) -- de-duplicate and remove unreachable `switch` branches
+-   `side_effects` (default: `true`) -- Remove expressions which have no side effects
+    and whose results aren't used.
 
-- `toplevel` (default: `false`) -- drop unreferenced functions (`"funcs"`) and/or
-  variables (`"vars"`) in the top level scope (`false` by default, `true` to drop
-  both unreferenced functions and variables)
+-   `switches` (default: `true`) -- de-duplicate and remove unreachable `switch` branches
 
-- `top_retain` (default: `null`) -- prevent specific toplevel functions and
-  variables from `unused` removal (can be array, comma-separated, RegExp or
-  function. Implies `toplevel`)
+-   `toplevel` (default: `false`) -- drop unreferenced functions (`"funcs"`) and/or
+    variables (`"vars"`) in the top level scope (`false` by default, `true` to drop
+    both unreferenced functions and variables)
 
-- `typeofs` (default: `true`) -- Transforms `typeof foo == "undefined"` into
-  `foo === void 0`.  Note: recommend to set this value to `false` for IE10 and
-  earlier versions due to known issues.
+-   `top_retain` (default: `null`) -- prevent specific toplevel functions and
+    variables from `unused` removal (can be array, comma-separated, RegExp or
+    function. Implies `toplevel`)
 
-- `unsafe` (default: `false`) -- apply "unsafe" transformations
-  ([details](#the-unsafe-compress-option)).
+-   `typeofs` (default: `true`) -- Transforms `typeof foo == "undefined"` into
+    `foo === void 0`. Note: recommend to set this value to `false` for IE10 and
+    earlier versions due to known issues.
 
-- `unsafe_arrows` (default: `false`) -- Convert ES5 style anonymous function
-  expressions to arrow functions if the function body does not reference `this`.
-  Note: it is not always safe to perform this conversion if code relies on the
-  the function having a `prototype`, which arrow functions lack.
-  This transform requires that the `ecma` compress option is set to `2015` or greater.
+-   `unsafe` (default: `false`) -- apply "unsafe" transformations
+    ([details](#the-unsafe-compress-option)).
 
-- `unsafe_comps` (default: `false`) -- Reverse `<` and `<=` to `>` and `>=` to
-  allow improved compression. This might be unsafe when an at least one of two
-  operands is an object with computed values due the use of methods like `get`,
-  or `valueOf`. This could cause change in execution order after operands in the
-  comparison are switching. Compression only works if both `comparisons` and
-  `unsafe_comps` are both set to true.
+-   `unsafe_arrows` (default: `false`) -- Convert ES5 style anonymous function
+    expressions to arrow functions if the function body does not reference `this`.
+    Note: it is not always safe to perform this conversion if code relies on the
+    the function having a `prototype`, which arrow functions lack.
+    This transform requires that the `ecma` compress option is set to `2015` or greater.
 
-- `unsafe_Function` (default: `false`) -- compress and mangle `Function(args, code)`
-  when both `args` and `code` are string literals.
+-   `unsafe_comps` (default: `false`) -- Reverse `<` and `<=` to `>` and `>=` to
+    allow improved compression. This might be unsafe when an at least one of two
+    operands is an object with computed values due the use of methods like `get`,
+    or `valueOf`. This could cause change in execution order after operands in the
+    comparison are switching. Compression only works if both `comparisons` and
+    `unsafe_comps` are both set to true.
 
-- `unsafe_math` (default: `false`) -- optimize numerical expressions like
-  `2 * x * 3` into `6 * x`, which may give imprecise floating point results.
+-   `unsafe_Function` (default: `false`) -- compress and mangle `Function(args, code)`
+    when both `args` and `code` are string literals.
 
-- `unsafe_symbols` (default: `false`) -- removes keys from native Symbol
-  declarations, e.g `Symbol("kDog")` becomes `Symbol()`.
+-   `unsafe_math` (default: `false`) -- optimize numerical expressions like
+    `2 * x * 3` into `6 * x`, which may give imprecise floating point results.
 
-- `unsafe_methods` (default: false) -- Converts `{ m: function(){} }` to
-  `{ m(){} }`. `ecma` must be set to `6` or greater to enable this transform.
-  If `unsafe_methods` is a RegExp then key/value pairs with keys matching the
-  RegExp will be converted to concise methods.
-  Note: if enabled there is a risk of getting a "`<method name>` is not a
-  constructor" TypeError should any code try to `new` the former function.
+-   `unsafe_symbols` (default: `false`) -- removes keys from native Symbol
+    declarations, e.g `Symbol("kDog")` becomes `Symbol()`.
 
-- `unsafe_proto` (default: `false`) -- optimize expressions like
-  `Array.prototype.slice.call(a)` into `[].slice.call(a)`
+-   `unsafe_methods` (default: false) -- Converts `{ m: function(){} }` to
+    `{ m(){} }`. `ecma` must be set to `6` or greater to enable this transform.
+    If `unsafe_methods` is a RegExp then key/value pairs with keys matching the
+    RegExp will be converted to concise methods.
+    Note: if enabled there is a risk of getting a "`<method name>` is not a
+    constructor" TypeError should any code try to `new` the former function.
 
-- `unsafe_regexp` (default: `false`) -- enable substitutions of variables with
-  `RegExp` values the same way as if they are constants.
+-   `unsafe_proto` (default: `false`) -- optimize expressions like
+    `Array.prototype.slice.call(a)` into `[].slice.call(a)`
 
-- `unsafe_undefined` (default: `false`) -- substitute `void 0` if there is a
-  variable named `undefined` in scope (variable name will be mangled, typically
-  reduced to a single character)
+-   `unsafe_regexp` (default: `false`) -- enable substitutions of variables with
+    `RegExp` values the same way as if they are constants.
 
-- `unused` (default: `true`) -- drop unreferenced functions and variables (simple
-  direct variable assignments do not count as references unless set to `"keep_assign"`)
+-   `unsafe_undefined` (default: `false`) -- substitute `void 0` if there is a
+    variable named `undefined` in scope (variable name will be mangled, typically
+    reduced to a single character)
+
+-   `unused` (default: `true`) -- drop unreferenced functions and variables (simple
+    direct variable assignments do not count as references unless set to `"keep_assign"`)
 
 ## Mangle options
 
-- `eval` (default `false`) -- Pass `true` to mangle names visible in scopes
-  where `eval` or `with` are used.
+-   `eval` (default `false`) -- Pass `true` to mangle names visible in scopes
+    where `eval` or `with` are used.
 
-- `keep_classnames` (default `false`) -- Pass `true` to not mangle class names.
-  Pass a regular expression to only keep class names matching that regex.
-  See also: the `keep_classnames` [compress option](#compress-options).
+-   `keep_classnames` (default `false`) -- Pass `true` to not mangle class names.
+    Pass a regular expression to only keep class names matching that regex.
+    See also: the `keep_classnames` [compress option](#compress-options).
 
-- `keep_fnames` (default `false`) -- Pass `true` to not mangle function names.
-  Pass a regular expression to only keep function names matching that regex.
-  Useful for code relying on `Function.prototype.name`. See also: the `keep_fnames`
-  [compress option](#compress-options).
+-   `keep_fnames` (default `false`) -- Pass `true` to not mangle function names.
+    Pass a regular expression to only keep function names matching that regex.
+    Useful for code relying on `Function.prototype.name`. See also: the `keep_fnames`
+    [compress option](#compress-options).
 
-- `module` (default `false`) -- Pass `true` an ES6 modules, where the toplevel
-  scope is not the global scope. Implies `toplevel`.
+-   `module` (default `false`) -- Pass `true` an ES6 modules, where the toplevel
+    scope is not the global scope. Implies `toplevel`.
 
-- `nth_identifier` (default: an internal mangler that weights based on character
-  frequency analysis) -- Pass an object with a `get(n)` function that converts an
-  ordinal into the nth most favored (usually shortest) identifier.
-  Optionally also provide `reset()`, `sort()`, and `consider(chars, delta)` to
-  use character frequency analysis of the source code.
+-   `nth_identifier` (default: an internal mangler that weights based on character
+    frequency analysis) -- Pass an object with a `get(n)` function that converts an
+    ordinal into the nth most favored (usually shortest) identifier.
+    Optionally also provide `reset()`, `sort()`, and `consider(chars, delta)` to
+    use character frequency analysis of the source code.
 
-- `reserved` (default `[]`) -- Pass an array of identifiers that should be
-  excluded from mangling. Example: `["foo", "bar"]`.
+-   `reserved` (default `[]`) -- Pass an array of identifiers that should be
+    excluded from mangling. Example: `["foo", "bar"]`.
 
-- `toplevel` (default `false`) -- Pass `true` to mangle names declared in the
-  top level scope.
+-   `toplevel` (default `false`) -- Pass `true` to mangle names declared in the
+    top level scope.
 
-- `safari10` (default `false`) -- Pass `true` to work around the Safari 10 loop
-  iterator [bug](https://bugs.webkit.org/show_bug.cgi?id=171041)
-  "Cannot declare a let variable twice".
-  See also: the `safari10` [format option](#format-options).
+-   `safari10` (default `false`) -- Pass `true` to work around the Safari 10 loop
+    iterator [bug](https://bugs.webkit.org/show_bug.cgi?id=171041)
+    "Cannot declare a let variable twice".
+    See also: the `safari10` [format option](#format-options).
 
 Examples:
 
@@ -941,16 +1027,17 @@ Examples:
 // test.js
 var globalVar;
 function funcName(firstLongName, anotherLongName) {
-    var myVariable = firstLongName +  anotherLongName;
+    var myVariable = firstLongName + anotherLongName;
 }
 ```
+
 ```javascript
 var code = fs.readFileSync("test.js", "utf8");
 
 await minify(code).code;
 // 'function funcName(a,n){}var globalVar;'
 
-await minify(code, { mangle: { reserved: ['firstLongName'] } }).code;
+await minify(code, { mangle: { reserved: ["firstLongName"] } }).code;
 // 'function funcName(firstLongName,a){}var globalVar;'
 
 await minify(code, { mangle: { toplevel: true } }).code;
@@ -959,131 +1046,133 @@ await minify(code, { mangle: { toplevel: true } }).code;
 
 ### Mangle properties options
 
-- `builtins` (default: `false`) — Use `true` to allow the mangling of builtin
-  DOM properties. Not recommended to override this setting.
+-   `builtins` (default: `false`) — Use `true` to allow the mangling of builtin
+    DOM properties. Not recommended to override this setting.
 
-- `debug` (default: `false`) — Mangle names with the original name still present.
-  Pass an empty string `""` to enable, or a non-empty string to set the debug suffix.
+-   `debug` (default: `false`) — Mangle names with the original name still present.
+    Pass an empty string `""` to enable, or a non-empty string to set the debug suffix.
 
-- `keep_quoted` (default: `false`) — How quoting properties (`{"prop": ...}` and `obj["prop"]`) controls what gets mangled.
-  - `"strict"` (recommended) -- `obj.prop` is mangled.
-  - `false` -- `obj["prop"]` is mangled.
-  - `true` -- `obj.prop` is mangled unless there is `obj["prop"]` elsewhere in the code.
+-   `keep_quoted` (default: `false`) — How quoting properties (`{"prop": ...}` and `obj["prop"]`) controls what gets mangled.
 
-- `nth_identifer` (default: an internal mangler that weights based on character
-  frequency analysis) -- Pass an object with a `get(n)` function that converts an
-  ordinal into the nth most favored (usually shortest) identifier.
-  Optionally also provide `reset()`, `sort()`, and `consider(chars, delta)` to
-  use character frequency analysis of the source code.
+    -   `"strict"` (recommended) -- `obj.prop` is mangled.
+    -   `false` -- `obj["prop"]` is mangled.
+    -   `true` -- `obj.prop` is mangled unless there is `obj["prop"]` elsewhere in the code.
 
-- `regex` (default: `null`) — Pass a [RegExp literal or pattern string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) to only mangle property matching the regular expression.
+-   `nth_identifer` (default: an internal mangler that weights based on character
+    frequency analysis) -- Pass an object with a `get(n)` function that converts an
+    ordinal into the nth most favored (usually shortest) identifier.
+    Optionally also provide `reset()`, `sort()`, and `consider(chars, delta)` to
+    use character frequency analysis of the source code.
 
-- `reserved` (default: `[]`) — Do not mangle property names listed in the
-  `reserved` array.
+-   `regex` (default: `null`) — Pass a [RegExp literal or pattern string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp) to only mangle property matching the regular expression.
 
-- `undeclared` (default: `false`) - Mangle those names when they are accessed
-  as properties of known top level variables but their declarations are never
-  found in input code. May be useful when only minifying parts of a project.
-  See [#397](https://github.com/terser/terser/issues/397) for more details.
+-   `reserved` (default: `[]`) — Do not mangle property names listed in the
+    `reserved` array.
 
+-   `undeclared` (default: `false`) - Mangle those names when they are accessed
+    as properties of known top level variables but their declarations are never
+    found in input code. May be useful when only minifying parts of a project.
+    See [#397](https://github.com/terser/terser/issues/397) for more details.
 
 ## Format options
 
 These options control the format of Terser's output code. Previously known
 as "output options".
 
-- `ascii_only` (default `false`) -- escape Unicode characters in strings and
-  regexps (affects directives with non-ascii characters becoming invalid)
+-   `ascii_only` (default `false`) -- escape Unicode characters in strings and
+    regexps (affects directives with non-ascii characters becoming invalid)
 
-- `beautify` (default `false`) -- (DEPRECATED) whether to beautify the output.
-  When using the legacy `-b` CLI flag, this is set to true by default.
+-   `beautify` (default `false`) -- (DEPRECATED) whether to beautify the output.
+    When using the legacy `-b` CLI flag, this is set to true by default.
 
-- `braces` (default `false`) -- always insert braces in `if`, `for`,
-  `do`, `while` or `with` statements, even if their body is a single
-  statement.
+-   `braces` (default `false`) -- always insert braces in `if`, `for`,
+    `do`, `while` or `with` statements, even if their body is a single
+    statement.
 
-- `comments` (default `"some"`) -- by default it keeps JSDoc-style comments
-  that contain "@license", "@copyright", "@preserve" or start with `!`, pass `true`
-  or `"all"` to preserve all comments, `false` to omit comments in the output,
-  a regular expression string (e.g. `/^!/`) or a function.
+-   `comments` (default `"some"`) -- by default it keeps JSDoc-style comments
+    that contain "@license", "@copyright", "@preserve" or start with `!`, pass `true`
+    or `"all"` to preserve all comments, `false` to omit comments in the output,
+    a regular expression string (e.g. `/^!/`) or a function.
 
-- `ecma` (default `5`) -- set desired EcmaScript standard version for output.
-  Set `ecma` to `2015` or greater to emit shorthand object properties - i.e.:
-  `{a}` instead of `{a: a}`.  The `ecma` option will only change the output in
-  direct control of the beautifier. Non-compatible features in your input will
-  still be output as is. For example: an `ecma` setting of `5` will **not**
-  convert modern code to ES5.
+-   `ecma` (default `5`) -- set desired EcmaScript standard version for output.
+    Set `ecma` to `2015` or greater to emit shorthand object properties - i.e.:
+    `{a}` instead of `{a: a}`. The `ecma` option will only change the output in
+    direct control of the beautifier. Non-compatible features in your input will
+    still be output as is. For example: an `ecma` setting of `5` will **not**
+    convert modern code to ES5.
 
-- `indent_level` (default `4`)
+-   `indent_level` (default `4`)
 
-- `indent_start` (default `0`) -- prefix all lines by that many spaces
+-   `indent_start` (default `0`) -- prefix all lines by that many spaces
 
-- `inline_script` (default `true`) -- escape HTML comments and the slash in
-  occurrences of `</script>` in strings
+-   `inline_script` (default `true`) -- escape HTML comments and the slash in
+    occurrences of `</script>` in strings
 
-- `keep_numbers` (default `false`) -- keep number literals as it was in original code
- (disables optimizations like converting `1000000` into `1e6`)
+-   `keep_numbers` (default `false`) -- keep number literals as it was in original code
+    (disables optimizations like converting `1000000` into `1e6`)
 
-- `keep_quoted_props` (default `false`) -- when turned on, prevents stripping
-  quotes from property names in object literals.
+-   `keep_quoted_props` (default `false`) -- when turned on, prevents stripping
+    quotes from property names in object literals.
 
-- `max_line_len` (default `false`) -- maximum line length (for minified code)
+-   `max_line_len` (default `false`) -- maximum line length (for minified code)
 
-- `preamble` (default `null`) -- when passed it must be a string and
-  it will be prepended to the output literally.  The source map will
-  adjust for this text.  Can be used to insert a comment containing
-  licensing information, for example.
+-   `preamble` (default `null`) -- when passed it must be a string and
+    it will be prepended to the output literally. The source map will
+    adjust for this text. Can be used to insert a comment containing
+    licensing information, for example.
 
-- `quote_keys` (default `false`) -- pass `true` to quote all keys in literal
-  objects
+-   `quote_keys` (default `false`) -- pass `true` to quote all keys in literal
+    objects
 
-- `quote_style` (default `0`) -- preferred quote style for strings (affects
-  quoted property names and directives as well):
-  - `0` -- prefers double quotes, switches to single quotes when there are
-    more double quotes in the string itself. `0` is best for gzip size.
-  - `1` -- always use single quotes
-  - `2` -- always use double quotes
-  - `3` -- always use the original quotes
+-   `quote_style` (default `0`) -- preferred quote style for strings (affects
+    quoted property names and directives as well):
 
-- `preserve_annotations` -- (default `false`) -- Preserve [Terser annotations](#annotations) in the output.
+    -   `0` -- prefers double quotes, switches to single quotes when there are
+        more double quotes in the string itself. `0` is best for gzip size.
+    -   `1` -- always use single quotes
+    -   `2` -- always use double quotes
+    -   `3` -- always use the original quotes
 
-- `safari10` (default `false`) -- set this option to `true` to work around
-  the [Safari 10/11 await bug](https://bugs.webkit.org/show_bug.cgi?id=176685).
-  See also: the `safari10` [mangle option](#mangle-options).
+-   `preserve_annotations` -- (default `false`) -- Preserve [Terser annotations](#annotations) in the output.
 
-- `semicolons` (default `true`) -- separate statements with semicolons.  If
-  you pass `false` then whenever possible we will use a newline instead of a
-  semicolon, leading to more readable output of minified code (size before
-  gzip could be smaller; size after gzip insignificantly larger).
+-   `safari10` (default `false`) -- set this option to `true` to work around
+    the [Safari 10/11 await bug](https://bugs.webkit.org/show_bug.cgi?id=176685).
+    See also: the `safari10` [mangle option](#mangle-options).
 
-- `shebang` (default `true`) -- preserve shebang `#!` in preamble (bash scripts)
+-   `semicolons` (default `true`) -- separate statements with semicolons. If
+    you pass `false` then whenever possible we will use a newline instead of a
+    semicolon, leading to more readable output of minified code (size before
+    gzip could be smaller; size after gzip insignificantly larger).
 
-- `spidermonkey` (default `false`) -- produce a Spidermonkey (Mozilla) AST
+-   `shebang` (default `true`) -- preserve shebang `#!` in preamble (bash scripts)
 
-- `webkit` (default `false`) -- enable workarounds for WebKit bugs.
-  PhantomJS users should set this option to `true`.
+-   `spidermonkey` (default `false`) -- produce a Spidermonkey (Mozilla) AST
 
-- `wrap_iife` (default `false`) -- pass `true` to wrap immediately invoked
-  function expressions. See
-  [#640](https://github.com/mishoo/UglifyJS2/issues/640) for more details.
+-   `webkit` (default `false`) -- enable workarounds for WebKit bugs.
+    PhantomJS users should set this option to `true`.
 
-- `wrap_func_args` (default `true`) -- pass `false` if you do not want to wrap
-  function expressions that are passed as arguments, in parenthesis. See
-  [OptimizeJS](https://github.com/nolanlawson/optimize-js) for more details.
+-   `wrap_iife` (default `false`) -- pass `true` to wrap immediately invoked
+    function expressions. See
+    [#640](https://github.com/mishoo/UglifyJS2/issues/640) for more details.
+
+-   `wrap_func_args` (default `true`) -- pass `false` if you do not want to wrap
+    function expressions that are passed as arguments, in parenthesis. See
+    [OptimizeJS](https://github.com/nolanlawson/optimize-js) for more details.
 
 # Miscellaneous
 
 ### Keeping copyright notices or other comments
 
-You can pass `--comments` to retain certain comments in the output.  By
+You can pass `--comments` to retain certain comments in the output. By
 default it will keep comments starting with "!" and JSDoc-style comments that
 contain "@preserve", "@copyright", "@license" or "@cc_on" (conditional compilation for IE).
 You can pass `--comments all` to keep all the comments, or a valid JavaScript regexp to
-keep only comments that match this regexp.  For example `--comments /^!/`
+keep only comments that match this regexp. For example `--comments /^!/`
 will keep comments like `/*! Copyright Notice */`.
 
-Note, however, that there might be situations where comments are lost.  For
+Note, however, that there might be situations where comments are lost. For
 example:
+
 ```javascript
 function f() {
     /** @preserve Foo Bar */
@@ -1103,25 +1192,26 @@ needs to be kept in the output) are comments attached to toplevel nodes.
 
 ### The `unsafe` `compress` option
 
-It enables some transformations that *might* break code logic in certain
-contrived cases, but should be fine for most code.  It assumes that standard
+It enables some transformations that _might_ break code logic in certain
+contrived cases, but should be fine for most code. It assumes that standard
 built-in ECMAScript functions and classes have not been altered or replaced.
 You might want to try it on your own code; it should reduce the minified size.
 Some examples of the optimizations made when this option is enabled:
 
-- `new Array(1, 2, 3)` or `Array(1, 2, 3)` → `[ 1, 2, 3 ]`
-- `Array.from([1, 2, 3])` → `[1, 2, 3]`
-- `new Object()` → `{}`
-- `String(exp)` or `exp.toString()` → `"" + exp`
-- `new Object/RegExp/Function/Error/Array (...)` → we discard the `new`
-- `"foo bar".substr(4)` → `"bar"`
+-   `new Array(1, 2, 3)` or `Array(1, 2, 3)` → `[ 1, 2, 3 ]`
+-   `Array.from([1, 2, 3])` → `[1, 2, 3]`
+-   `new Object()` → `{}`
+-   `String(exp)` or `exp.toString()` → `"" + exp`
+-   `new Object/RegExp/Function/Error/Array (...)` → we discard the `new`
+-   `"foo bar".substr(4)` → `"bar"`
 
 ### Conditional compilation
 
 You can use the `--define` (`-d`) switch in order to declare global
 variables that Terser will assume to be constants (unless defined in
-scope).  For example if you pass `--define DEBUG=false` then, coupled with
+scope). For example if you pass `--define DEBUG=false` then, coupled with
 dead code removal Terser will discard the following from the output:
+
 ```javascript
 if (DEBUG) {
     console.log("debug stuff");
@@ -1131,8 +1221,9 @@ if (DEBUG) {
 You can specify nested constants in the form of `--define env.DEBUG=false`.
 
 Another way of doing that is to declare your globals as constants in a
-separate file and include it into the build.  For example you can have a
+separate file and include it into the build. For example you can have a
 `build/defines.js` file with the following:
+
 ```javascript
 var DEBUG = false;
 var PRODUCTION = true;
@@ -1145,7 +1236,7 @@ and build your code like this:
 
 Terser will notice the constants and, since they cannot be altered, it
 will evaluate references to them to the value itself and drop unreachable
-code as usual.  The build will contain the `const` declarations if you use
+code as usual. The build will contain the `const` declarations if you use
 them. If you are targeting < ES6 environments which does not support `const`,
 using `var` with `reduce_vars` (enabled by default) should suffice.
 
@@ -1159,34 +1250,36 @@ var result = await minify(fs.readFileSync("input.js", "utf8"), {
     compress: {
         dead_code: true,
         global_defs: {
-            DEBUG: false
-        }
-    }
+            DEBUG: false,
+        },
+    },
 });
 ```
 
 To replace an identifier with an arbitrary non-constant expression it is
 necessary to prefix the `global_defs` key with `"@"` to instruct Terser
 to parse the value as an expression:
+
 ```javascript
 await minify("alert('hello');", {
     compress: {
         global_defs: {
-            "@alert": "console.log"
-        }
-    }
+            "@alert": "console.log",
+        },
+    },
 }).code;
 // returns: 'console.log("hello");'
 ```
 
 Otherwise it would be replaced as string literal:
+
 ```javascript
 await minify("alert('hello');", {
     compress: {
         global_defs: {
-            "alert": "console.log"
-        }
-    }
+            alert: "console.log",
+        },
+    },
 }).code;
 // returns: '"console.log"("hello");'
 ```
@@ -1195,9 +1288,9 @@ await minify("alert('hello');", {
 
 Annotations in Terser are a way to tell it to treat a certain function call differently. The following annotations are available:
 
- * `/*@__INLINE__*/` - forces a function to be inlined somewhere.
- * `/*@__NOINLINE__*/` - Makes sure the called function is not inlined into the call site.
- * `/*@__PURE__*/` - Marks a function call as pure. That means, it can safely be dropped.
+-   `/*@__INLINE__*/` - forces a function to be inlined somewhere.
+-   `/*@__NOINLINE__*/` - Makes sure the called function is not inlined into the call site.
+-   `/*@__PURE__*/` - Marks a function call as pure. That means, it can safely be dropped.
 
 You can use either a `@` sign at the start, or a `#`.
 
@@ -1205,30 +1298,30 @@ Here are some examples on how to use them:
 
 ```javascript
 /*@__INLINE__*/
-function_always_inlined_here()
+function_always_inlined_here();
 
 /*#__NOINLINE__*/
-function_cant_be_inlined_into_here()
+function_cant_be_inlined_into_here();
 
-const x = /*#__PURE__*/i_am_dropped_if_x_is_not_used()
+const x = /*#__PURE__*/ i_am_dropped_if_x_is_not_used();
 ```
 
 ### ESTree / SpiderMonkey AST
 
 Terser has its own abstract syntax tree format; for
 [practical reasons](http://lisperator.net/blog/uglifyjs-why-not-switching-to-spidermonkey-ast/)
-we can't easily change to using the SpiderMonkey AST internally.  However,
+we can't easily change to using the SpiderMonkey AST internally. However,
 Terser now has a converter which can import a SpiderMonkey AST.
 
 For example [Acorn][acorn] is a super-fast parser that produces a
-SpiderMonkey AST.  It has a small CLI utility that parses one file and dumps
-the AST in JSON on the standard output.  To use Terser to mangle and
+SpiderMonkey AST. It has a small CLI utility that parses one file and dumps
+the AST in JSON on the standard output. To use Terser to mangle and
 compress that:
 
     acorn file.js | terser -p spidermonkey -m -c
 
 The `-p spidermonkey` option tells Terser that all input files are not
-JavaScript, but JS code described in SpiderMonkey AST in JSON.  Therefore we
+JavaScript, but JS code described in SpiderMonkey AST in JSON. Therefore we
 don't use our own parser in this case, but just transform that AST into our
 internal AST.
 
@@ -1238,7 +1331,7 @@ accept and/or produce a spidermonkey AST.
 ### Use Acorn for parsing
 
 More for fun, I added the `-p acorn` option which will use Acorn to do all
-the parsing.  If you pass this option, Terser will `require("acorn")`.
+the parsing. If you pass this option, Terser will `require("acorn")`.
 
 Acorn is really fast (e.g. 250ms instead of 380ms on some 650K code), but
 converting the SpiderMonkey tree that Acorn produces takes another 150ms so
@@ -1254,21 +1347,24 @@ for 95% of the size reduction in minified code for most JavaScript - not
 elaborate code transforms. One can simply disable `compress` to speed up
 Terser builds by 3 to 4 times.
 
-| d3.js | size | gzip size | time (s) |
-|   --- | ---: |      ---: |     ---: |
-| original                                    | 451,131 | 108,733 |     - |
-| terser@3.7.5 mangle=false, compress=false   | 316,600 |  85,245 |  0.82 |
-| terser@3.7.5 mangle=true, compress=false    | 220,216 |  72,730 |  1.45 |
-| terser@3.7.5 mangle=true, compress=true     | 212,046 |  70,954 |  5.87 |
-| babili@0.1.4                                | 210,713 |  72,140 | 12.64 |
-| babel-minify@0.4.3                          | 210,321 |  72,242 | 48.67 |
-| babel-minify@0.5.0-alpha.01eac1c3           | 210,421 |  72,238 | 14.17 |
+| d3.js                                     |    size | gzip size | time (s) |
+| ----------------------------------------- | ------: | --------: | -------: |
+| original                                  | 451,131 |   108,733 |        - |
+| terser@3.7.5 mangle=false, compress=false | 316,600 |    85,245 |     0.82 |
+| terser@3.7.5 mangle=true, compress=false  | 220,216 |    72,730 |     1.45 |
+| terser@3.7.5 mangle=true, compress=true   | 212,046 |    70,954 |     5.87 |
+| babili@0.1.4                              | 210,713 |    72,140 |    12.64 |
+| babel-minify@0.4.3                        | 210,321 |    72,242 |    48.67 |
+| babel-minify@0.5.0-alpha.01eac1c3         | 210,421 |    72,238 |    14.17 |
 
 To enable fast minify mode from the CLI use:
+
 ```
 terser file.js -m
 ```
+
 To enable fast minify mode with the API use:
+
 ```js
 await minify(code, { compress: false, mangle: true });
 ```
@@ -1285,19 +1381,19 @@ disable the `compress` option and just use `mangle`.
 
 To allow for better optimizations, the compiler makes various assumptions:
 
-- `.toString()` and `.valueOf()` don't have side effects, and for built-in
-  objects they have not been overridden.
-- `undefined`, `NaN` and `Infinity` have not been externally redefined.
-- `arguments.callee`, `arguments.caller` and `Function.prototype.caller` are not used.
-- The code doesn't expect the contents of `Function.prototype.toString()` or
-  `Error.prototype.stack` to be anything in particular.
-- Getting and setting properties on a plain object does not cause other side effects
-  (using `.watch()` or `Proxy`).
-- Object properties can be added, removed and modified (not prevented with
-  `Object.defineProperty()`, `Object.defineProperties()`, `Object.freeze()`,
-  `Object.preventExtensions()` or `Object.seal()`).
-- `document.all` is not `== null`
-- Assigning properties to a class doesn't have side effects and does not throw.
+-   `.toString()` and `.valueOf()` don't have side effects, and for built-in
+    objects they have not been overridden.
+-   `undefined`, `NaN` and `Infinity` have not been externally redefined.
+-   `arguments.callee`, `arguments.caller` and `Function.prototype.caller` are not used.
+-   The code doesn't expect the contents of `Function.prototype.toString()` or
+    `Error.prototype.stack` to be anything in particular.
+-   Getting and setting properties on a plain object does not cause other side effects
+    (using `.watch()` or `Proxy`).
+-   Object properties can be added, removed and modified (not prevented with
+    `Object.defineProperty()`, `Object.defineProperties()`, `Object.freeze()`,
+    `Object.preventExtensions()` or `Object.seal()`).
+-   `document.all` is not `== null`
+-   Assigning properties to a class doesn't have side effects and does not throw.
 
 ### Build Tools and Adaptors using Terser
 
@@ -1350,12 +1446,12 @@ If you're not sure how to set an environment variable on your shell (the above e
 
 # README.md Patrons:
 
-*note*: You can support this project on patreon: <a target="_blank" rel="nofollow" href="https://www.patreon.com/fabiosantoscode"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="patron" width="100px" height="auto"></a>. Check out [PATRONS.md](https://github.com/terser/terser/blob/master/PATRONS.md) for our first-tier patrons.
+_note_: You can support this project on patreon: <a target="_blank" rel="nofollow" href="https://www.patreon.com/fabiosantoscode"><img src="https://c5.patreon.com/external/logo/become_a_patron_button@2x.png" alt="patron" width="100px" height="auto"></a>. Check out [PATRONS.md](https://github.com/terser/terser/blob/master/PATRONS.md) for our first-tier patrons.
 
 These are the second-tier patrons. Great thanks for your support!
 
- * CKEditor ![](https://c10.patreonusercontent.com/3/eyJoIjoxMDAsInciOjEwMH0%3D/patreon-media/p/user/15452278/f8548dcf48d740619071e8d614459280/1?token-time=2145916800&token-hash=SIQ54PhIPHv3M7CVz9LxS8_8v4sOw4H304HaXsXj8MM%3D)
- * 38elements ![](https://c10.patreonusercontent.com/3/eyJ3IjoyMDB9/patreon-media/p/user/12501844/88e7fc5dd62d45c6a5626533bbd48cfb/1?token-time=2145916800&token-hash=c3AsQ5T0IQWic0zKxFHu-bGGQJkXQFvafvJ4bPerFR4%3D)
+-   CKEditor ![](https://c10.patreonusercontent.com/3/eyJoIjoxMDAsInciOjEwMH0%3D/patreon-media/p/user/15452278/f8548dcf48d740619071e8d614459280/1?token-time=2145916800&token-hash=SIQ54PhIPHv3M7CVz9LxS8_8v4sOw4H304HaXsXj8MM%3D)
+-   38elements ![](https://c10.patreonusercontent.com/3/eyJ3IjoyMDB9/patreon-media/p/user/12501844/88e7fc5dd62d45c6a5626533bbd48cfb/1?token-time=2145916800&token-hash=c3AsQ5T0IQWic0zKxFHu-bGGQJkXQFvafvJ4bPerFR4%3D)
 
 ## Contributors
 
