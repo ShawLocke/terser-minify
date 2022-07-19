@@ -4,9 +4,9 @@ In code editor, I only need the format feature of Terser (imagine you minify JS 
 
 Note: 
 
-    - based on Terser 5.14.1.
-    - extract `format` from Terser, strip out `mangle` and `compress`, get rid of 2 dependencies. Bundle size is [243kB](@shawlocke/terser-minify@5.14.4) now (Terser bundle size is [557kB](https://bundlephobia.com/package/terser@5.14.1))
-    - get rid of 1 dependency. Bundle size is [136kB] now.
+- based on Terser 5.14.1.
+- extract `format` from Terser, strip out `mangle` and `compress`, get rid of 2 dependencies. Bundle size is [243kB](@shawlocke/terser-minify@5.14.4) now (Terser bundle size is [557kB](https://bundlephobia.com/package/terser@5.14.1))
+- get rid of 1 dependency. Bundle size is [136kB] now.
     
 ---
 
