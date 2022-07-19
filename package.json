@@ -47,7 +47,6 @@
         "main.js"
     ],
     "dependencies": {
-        "acorn": "^8.5.0",
         "commander": "^2.20.0"
     },
     "devDependencies": {
